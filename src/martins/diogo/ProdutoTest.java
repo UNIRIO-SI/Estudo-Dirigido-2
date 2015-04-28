@@ -25,15 +25,11 @@ public class ProdutoTest extends TestCase {
         this.produto = new Produto(codigo, nome, precoBase);
     }
 
-    private boolean temDesconto(double entrada, double saida){
-        return saida < entrada;
-    }
-
     @Parameterized.Parameters
     public static Collection<Object[]> data(){
         return Arrays.asList(new Object[][]{
                 {"AAA111", "Produto teste 1", 10.50},
-                {"AAA110", "Produto produto teste 2", 0.0},
+                {"AAA110", "Produto produto teste 2", 234230.0},
                 {"AAA112", "Produto protudo teste 3", 10.50},
                 {"AAA113", "Produto produto teste 4", 10},
         });
@@ -60,7 +56,7 @@ public class ProdutoTest extends TestCase {
         try {
             for (int quantidade: QTDS_COM_DESCONTO){
                 double semDesconto = this.produto.getPrecoBase() * quantidade;
-                assertTrue(temDesconto(semDesconto, this.produto.precoParaQtde(quantidade)));
+                assertTrue(this.produto.precoParaQtde(quantidade) < semDesconto);
             }
         } catch (Exception e) {
             fail();
@@ -72,7 +68,7 @@ public class ProdutoTest extends TestCase {
         try {
             for (int quantidade: QTDS_COM_DESCONTO_DOBRADO){
                 double semDesconto = this.produto.getPrecoBase() * quantidade;
-                assertTrue(temDesconto(semDesconto, this.produto.precoParaQtde(quantidade)));
+                assertTrue(this.produto.precoParaQtde(quantidade) < semDesconto);
             }
         } catch (Exception e) {
             fail();
