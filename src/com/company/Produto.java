@@ -8,18 +8,23 @@ public class Produto {
     public String nome;
     public double precoBase;
 
+    public Produto(String codigo, String nome, double precoBase) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.precoBase = precoBase;
+    }
 
     public double precoParaQtde(int quantidade) throws Exception{
-        double preco = quantidade * this.precoBase;
+        double precoSemDesconto = quantidade * this.precoBase;
 
         if (quantidade <= 3){
-            return preco;
+            return precoSemDesconto;
         }
         else if(quantidade <= 8){
-            return this.desconto(10, preco);
+            return this.desconto(10, precoSemDesconto);
         }
         else if(quantidade > 8){
-            return this.desconto(20, preco);
+            return this.desconto(20, precoSemDesconto);
         }
         throw new Exception("Quantidade < 0");
     }
