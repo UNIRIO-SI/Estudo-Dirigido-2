@@ -35,6 +35,11 @@ public class ProdutoTest extends TestCase {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    @Test
+    public void testPrecoParaQtdeSemDesconto() throws Exception {
+        double preco = this.produto.precoParaQtde(QTD_SEM_DESCONTO);
+        assertEquals(preco, this.produto.getPrecoBase() * QTD_SEM_DESCONTO);
+    }
 
     @Test
     public void testPrecoParaQuantidadeInvalida() throws Exception{
